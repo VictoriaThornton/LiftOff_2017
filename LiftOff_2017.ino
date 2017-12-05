@@ -15,7 +15,7 @@
 #include "MyRobot.h"
 #include "DFWJoystick.h"
 
-DFWJoystick joystick;
+//DFWJoystick joystick;
 MyRobot myRobot;
 DFW dfw(&myRobot); // Instantiates the DFW object and setting the debug pin. The debug pin will be set high if no communication is seen after 2 seconds
 
@@ -24,8 +24,9 @@ void setup() {
   dfw.begin(); // Serial1 output begin for DFW library. Buad and port #."Serial1 only"
   myRobot.init();
   myRobot.dfw=&dfw;
-  joystick.dfw=&dfw;
+
 }
 void loop() {
   dfw.run();
+  
 }

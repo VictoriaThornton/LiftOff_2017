@@ -11,14 +11,15 @@
   enum CompetitionState {
   powerup, waitForAuto, Autonomous,waitForTeleop, Teleop
   };*/
-Drivetrain drivetrain;
-Intake intake;
-Lift lift;
+//Drivetrain drivetrain;
+//Intake intake;
+//Lift lift;
 
 extern Servo rightDriveMotor, leftDriveMotor;
 extern DFW *dfw;
 
 void tankDrive(){ 
+  Serial.println("DRIVING");
   rightDriveMotor.write(180-dfw->joystickrv());
   leftDriveMotor.write(dfw->joysticklv());
 }
@@ -26,23 +27,27 @@ void tankDrive(){
 
 void checkForUpdates() {
   if (dfw->getCompetitionState() != Teleop) {
-    tankDrive();
+//    tankDrive();
 
     if (dfw->one()) {
+  Serial.println("ONE");
       //LIFT UP
-      lift.liftUp();
+//      lift.liftUp();
     }
     if (dfw->two()) {
       //LIFT DOWN
-      lift.liftDown();
+      Serial.println("TWO");
+//      lift.liftDown();
     }
     if (dfw->three()) {
       //INTAKE IN
-      intake.intakeIn();
+      Serial.println("THREE");
+//      intake.intakeIn();
     }
     if (dfw->four()) {
       //INTAKE OUT
-      intake.intakeOut();
+      Serial.println("FOUR");
+//      intake.intakeOut();
     }
   }
 }
