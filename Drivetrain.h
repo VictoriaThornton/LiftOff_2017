@@ -1,5 +1,5 @@
-#ifndef _INTAKE_h
-#define _INTAKE_h
+#ifndef _DRIVETRAIN_h
+#define _DRIVETRAIN_h
 
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
@@ -11,12 +11,12 @@
 #include "Servo.h"
 #include "RobotMap.h"
 
-class Intake{
+class Drivetrain{
   
   public: 
    void init();
-   void intakeIn();
-   void intakeOut();
+   void driveStraight(int speed);
+   void turn(int turn);
   private: 
    
   
