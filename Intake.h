@@ -1,26 +1,14 @@
-#ifndef _INTAKE_h
-#define _INTAKE_h
-
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
 #pragma once
 
 #include "Servo.h"
-#include "RobotMap.h"
 
-class Intake{
-  
-  public: 
-   void init();
-   void intakeIn();
-   void intakeOut();
-  private: 
-   
-  
+class Intake {
+  public:
+    void init();
+    void intakeOut();
+    void intakeIn();
+    void stopIntake();
+
+  private:
+    Servo leftIntakeMotor, rightIntakeMotor;
 };
-
-//extern MyRobot MyRobot;
-#endif

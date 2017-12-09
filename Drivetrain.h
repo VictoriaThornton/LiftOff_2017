@@ -1,26 +1,16 @@
-#ifndef _DRIVETRAIN_h
-#define _DRIVETRAIN_h
+#pragma once;
 
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
-#pragma once
-
-#include "Servo.h"
-#include "RobotMap.h"
+#include <Servo.h>
 
 class Drivetrain{
-  
   public: 
-   void init();
-   void driveStraight(int speed);
-   void turn(int turn);
-  private: 
-   
-  
-};
+    void init();
+    void driveStraight(int speed);
+    void turn(int turn);
+    void driveWithJoystick(int leftMotorSpeed, int rightMotorSpeed);
+    void stopDrive();
 
-//extern MyRobot MyRobot;
-#endif
+   private: 
+    unsigned lightTrackerPin;
+    Servo leftDriveMotor, rightDriveMotor;
+};

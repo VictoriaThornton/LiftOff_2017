@@ -1,26 +1,29 @@
-#pragma once;
-#include "MyRobot.h"
 #include "Arduino.h"
-#include "RobotMap.h"
-#include <Servo.h>
 #include "Drivetrain.h"
-/**
- * These are the execution runtions
- */
-//!!!
 
-extern Servo rightDriveMotor, leftDriveMotor;
+
+
+//TODO-add encoders? gyro? line tracker
 void Drivetrain::init() {
-//!!! call robotMap here
+  leftDriveMotor.attach(4, 1000, 2000);
+  rightDriveMotor.attach(5, 1000, 2000);
 }
+
+void Drivetrain::driveWithJoystick(int leftMotorSpeed, int rightMotorSpeed) {
+  leftDriveMotor.write(leftMotorSpeed);
+  rightDriveMotor.write(rightMotorSpeed);
+}
+
 void Drivetrain::turn(int turn) {
-//!!! call robotMap here
-  leftDriveMotor.write(90-turn);
-  rightDriveMotor.write(90-turn);
+  leftDriveMotor.write(90 - turn);
+  rightDriveMotor.write(90 - turn);
 }
 void Drivetrain::driveStraight(int speed) {
-//!!! call robotMap here
-  leftDriveMotor.write(90-speed);
-  rightDriveMotor.write(90+speed);
+  leftDriveMotor.write(90 - speed);
+  rightDriveMotor.write(90 + speed);
 }
 
+void Drivetrain::stopDrive() {
+  leftDriveMotor.write(90);
+  rightDriveMotor.write(90);
+}

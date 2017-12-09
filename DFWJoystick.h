@@ -1,25 +1,16 @@
-#ifndef _DFWJOYSTICK_h
-#define _DFWJOYSTICK_h
-
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
-
-#pragma once;
+#pragma once
 
 #include <DFW.h>
-#include "MyRobot.h"
+#include "Lift.h"
+#include "Drivetrain.h"
+#include "Intake.h"
 
-class DFWJoystick{
-    
-  public: 
-    DFW *dfw;
+class DFWJoystick {
+  public:
+    DFW *dfwPointer;
 
-    void checkForUpdates();
-    void tankDrive();  
+    void init();
+    void checkForInput(); //checks for joystick input and reacts accordingly
+
+  private:
 };
-//extern DFWJoystick DFWJoystick;
-
-#endif
