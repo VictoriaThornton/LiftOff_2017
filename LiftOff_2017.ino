@@ -25,4 +25,5 @@ void setup() {
 }
 void loop() {
   dfw.run();
+ // Serial.println(analogRead(8));
 }

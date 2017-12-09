@@ -7,6 +7,7 @@
 void Drivetrain::init() {
   leftDriveMotor.attach(4, 1000, 2000);
   rightDriveMotor.attach(5, 1000, 2000);
+  pinMode(lineTrackerPin, INPUT);
 }
 
 void Drivetrain::driveWithJoystick(int leftMotorSpeed, int rightMotorSpeed) {

@@ -11,6 +11,6 @@ class Drivetrain{
     void stopDrive();
 
    private: 
-    unsigned lightTrackerPin;
+    unsigned lineTrackerPin;
     Servo leftDriveMotor, rightDriveMotor;
 };
