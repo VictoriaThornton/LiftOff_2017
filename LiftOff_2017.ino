@@ -9,7 +9,7 @@
  * The functions will be called by the competition framework based on the
  * time and start button. DO NOT change this file, your code will be called
  * by the framework. The framework will pass your code a reference to the DFW
- * object as well as the amount of MS remaining.
+ * object as well as the amount of MS remaining.0112
  */
 #include <DFW.h>
 #include "MyRobot.h"
@@ -25,5 +25,7 @@ void setup() {
 }
 void loop() {
   dfw.run();
- // Serial.println(analogRead(8));
+//  Serial.println(analogRead(7)); //read potentiometer value...
+  //Serial.println(analogRead(0),DEC);
+  //make line trackers 8&9? 
 }

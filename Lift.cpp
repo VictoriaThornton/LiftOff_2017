@@ -16,3 +16,14 @@ void Lift::liftDown(){
 void Lift::stopLift(){
   liftMotor.write(90);  
 }
+
+//PRESET POSITIONS: 
+void Lift::topPosition(){
+  liftMotor.write(90);  
+}
+void Lift::middlePosition(){
+  liftMotor.write(90);  
+}
+void Lift::bottomPosition(){
+  liftMotor.write(90);  
+}

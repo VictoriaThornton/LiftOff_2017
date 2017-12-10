@@ -10,13 +10,13 @@ void Intake::init() {
 
 //check directions...
 void Intake::intakeOut() {
-  leftIntakeMotor.write(90 - 20);
-  rightIntakeMotor.write(90 + 20);
+  leftIntakeMotor.write(90 + 20);
+  rightIntakeMotor.write(90 - 20);
 }
 
 void Intake::intakeIn() {
-  leftIntakeMotor.write(90 + 20);
-  rightIntakeMotor.write(90 - 20);
+  leftIntakeMotor.write(90 - 20);
+  rightIntakeMotor.write(90 + 20);
 }
 
 void Intake::stopIntake() {

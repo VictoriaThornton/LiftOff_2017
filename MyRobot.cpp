@@ -1,9 +1,12 @@
 #include "MyRobot.h"
 #include "Arduino.h"
+#include <LiquidCrystal.h>
 
 /**
    These are the execution runtions
 */
+LiquidCrystal lcd(40, 41, 42, 43, 44, 45);
+
 void MyRobot::initialize() {
   //initialize all objects here...
   //joystick.dfw = dfw;
@@ -11,6 +14,11 @@ void MyRobot::initialize() {
   intake.init();
   drivetrain.init();
   intake.stopIntake();
+
+  lcd.begin(16, 2);
+  lcd.clear();
+  lcd.setCursor(0, 0);
+
 }
 
 void MyRobot::moveTo(unsigned position) {
@@ -31,6 +39,11 @@ void MyRobot::robotStartup() {
 void MyRobot::autonomous( long time) {
   Serial.print("\r\nAuto time remaining: ");
   Serial.print(time);
+  lcd.print("AUTO RUNNING!");
+  lcd.setCursor(0, 1);
+  lcd.print(time);
+  lcd.setCursor(0, 0);
+
 }
 /**
    Called by the controller between communication with the wireless controller
@@ -47,7 +60,10 @@ void MyRobot::teleop( long time) {
   Serial.print(dfw->joysticklv());
   //Run functions in the robot class
   //moveTo(35);
-
+  lcd.print("TELEOP RUNNING!");
+  lcd.setCursor(0, 1);
+  lcd.print(time);
+  lcd.setCursor(0, 0);
   //  joystick.checkForInput();
 
   if (dfw->getCompetitionState() != powerup) {
@@ -59,16 +75,19 @@ void MyRobot::teleop( long time) {
   } else {
     lift.stopLift();
   }
-  if (dfw->two()) { //ACTUALLY DOWN
+  if (dfw->two()) { //MIDDLE POSITION
+    lift.middlePosition();
+  }
+  if (dfw->three()) { //ACTUALLY DOWN
     lift.liftDown();
   }
-  if (dfw->three()) { //ACTUALLY IN
-    intake.intakeOut();
-  }else{
-    intake.stopIntake();
-    }
-  if (dfw->four()) { //ACTUALLY OUT
+  if (dfw->l1()) { //ACTUALLY IN
     intake.intakeIn();
+  } else {
+    intake.stopIntake();
+  }
+  if (dfw->r1()) { //ACTUALLY OUT
+    intake.intakeOut();
   }
 
 }

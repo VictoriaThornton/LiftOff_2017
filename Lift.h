@@ -8,6 +8,9 @@ class Lift {
     void liftUp();
     void liftDown();
     void stopLift();
+    void topPosition();
+    void middlePosition();
+    void bottomPosition();
 
   private:
     unsigned potPin;
