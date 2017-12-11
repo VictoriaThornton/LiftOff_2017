@@ -7,11 +7,11 @@ void Lift::init(){
 }
 
 void Lift::liftUp(){
-  liftMotor.write(90+30);  
+  liftMotor.write(90-30);  
 }
 
 void Lift::liftDown(){
-  liftMotor.write(90-30);  
+  liftMotor.write(90+30);  
 }
 
 void Lift::stopLift(){
