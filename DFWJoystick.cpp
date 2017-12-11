@@ -16,7 +16,6 @@ void DFWJoystick::checkForInput() {
     drivetrain.driveWithJoystick(dfwPointer->joysticklv(), 180 - dfwPointer->joystickrv());
   }
   if (dfwPointer->one()) {
-    Serial.println("LIFTINGUP!!!!!!!!!!!!!!!!!!!!!");
     lift.liftUp();
   } else {
     lift.stopLift();

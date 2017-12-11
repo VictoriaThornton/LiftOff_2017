@@ -1,4 +1,5 @@
 #include "Lift.h"
+#include "Arduino.h"
 //TODO- add potentiometer..
 
 void Lift::init(){
@@ -19,11 +20,17 @@ void Lift::stopLift(){
 
 //PRESET POSITIONS: 
 void Lift::topPosition(){
-  liftMotor.write(90);  
+  error = (int) (desiredAngleUp-inputValue);
+  armValue = constrain(Kp*error,0,180);
+  liftMotor.write(armValue);
 }
 void Lift::middlePosition(){
-  liftMotor.write(90);  
+  error = (int) (desiredAngleMiddle-inputValue);
+  armValue = constrain(Kp*error,0,180);
+  liftMotor.write(armValue);
 }
 void Lift::bottomPosition(){
-  liftMotor.write(90);  
+  error = (int) (desiredAngleDown-inputValue);
+  armValue = constrain(Kp*error,0,180);
+  liftMotor.write(armValue);
 }

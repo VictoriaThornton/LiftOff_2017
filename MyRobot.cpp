@@ -7,7 +7,7 @@
 */
 LiquidCrystal lcd(40, 41, 42, 43, 44, 45);
 
-void MyRobot::initialize() {
+void MyRobot::initialize(){
   //initialize all objects here...
   //joystick.dfw = dfw;
   lift.init();
@@ -15,10 +15,9 @@ void MyRobot::initialize() {
   drivetrain.init();
   intake.stopIntake();
 
-  lcd.begin(16, 2);
+  lcd.begin(16,2);
   lcd.clear();
   lcd.setCursor(0, 0);
-
 }
 
 void MyRobot::moveTo(unsigned position) {
@@ -43,6 +42,8 @@ void MyRobot::autonomous( long time) {
   lcd.setCursor(0, 1);
   lcd.print(time);
   lcd.setCursor(0, 0);
+//note: add javadoc comments
+
 
 }
 /**
@@ -89,7 +90,6 @@ void MyRobot::teleop( long time) {
   if (dfw->r1()) { //ACTUALLY OUT
     intake.intakeOut();
   }
-
 }
 /**
    Called at the end of control to reset the objects for the next start

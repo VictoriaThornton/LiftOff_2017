@@ -18,14 +18,15 @@ MyRobot myRobot;
 DFW dfw(&myRobot); // Instantiates the DFW object and setting the debug pin. The debug pin will be set high if no communication is seen after 2 seconds
 
 void setup() {
-  Serial.begin(9600); // Serial output begin. Only needed for debug
+  Serial.begin(9600); // Serial output begin. On  ly needed for debug
   dfw.begin(); // Serial1 output begin for DFW library. Buad and port #."Serial1 only"
   myRobot.initialize();  //attach ports
   myRobot.dfw=&dfw;
 }
 void loop() {
   dfw.run();
-//  Serial.println(analogRead(7)); //read potentiometer value...
-  //Serial.println(analogRead(0),DEC);
+  //Serial.println(analogRead(7)); //read potentiometer value...
+  Serial.println(analogRead(9),DEC);
+  //make gyro 6? 
   //make line trackers 8&9? 
 }
