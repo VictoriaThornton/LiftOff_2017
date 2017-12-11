@@ -9,8 +9,9 @@ class Drivetrain{
     void turn(int turn);
     void driveWithJoystick(int leftMotorSpeed, int rightMotorSpeed);
     void stopDrive();
+    void stopAtLine();
 
    private: 
-    unsigned lineTrackerPin;
+    unsigned leftLineTrackerPin = 8, rightLineTrackerPin = 9;
     Servo leftDriveMotor, rightDriveMotor;
 };

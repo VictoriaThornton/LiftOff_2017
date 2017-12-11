@@ -13,7 +13,7 @@ class Lift {
     void bottomPosition();
 
   private:
-    unsigned potPin;
+    unsigned potPin = 7;
     Servo liftMotor;
     const double desiredAngleUp = 328 + 120, desiredAngleDown = 240+100,desiredAngleMiddle = ((240 + 100)-(328+120)); //in degrees
     const double Kp = 1, Ki = 0, Kd = 0;
