@@ -87,11 +87,18 @@ void MyRobot::teleop( long time) {
   }
   if (dfw->l1()) { //ACTUALLY IN
     intake.intakeIn();
-  } else {
-    intake.stopIntake();
   }
+  
   if (dfw->r1()) { //ACTUALLY OUT
     intake.intakeOut();
+  }
+
+    if (dfw->l2()) { //ACTUALLY OUT
+    intake.stopIntake();
+  }
+
+    if (dfw->r2()) { //ACTUALLY OUT
+    intake.stopIntake();
   }
 }
 /**
