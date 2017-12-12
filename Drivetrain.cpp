@@ -70,11 +70,11 @@ float Drivetrain::getGyroValue() {
 }
 
 void Drivetrain::stopAtLine(){
-  if(analogRead(leftLineTrackerPin) < 600 || analogRead(rightLineTrackerPin) < 600){
+  if(analogRead(leftLineTrackerPin) < 950 || analogRead(rightLineTrackerPin) < 950){
     stopDrive();
     delay(10);
   }
-  if (analogRead(leftLineTrackerPin) > 600 || analogRead(rightLineTrackerPin) > 600){
+  if (analogRead(leftLineTrackerPin) > 1000 || analogRead(rightLineTrackerPin) > 1000){
     driveStraight(30);  
   } 
 }
