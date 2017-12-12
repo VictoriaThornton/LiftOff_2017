@@ -9,7 +9,6 @@ LiquidCrystal lcd(40, 41, 42, 43, 44, 45);
 
 void MyRobot::initialize() {
   //initialize all objects here...
-  //joystick.dfw = dfw;
   lift.init();
   intake.init();
   drivetrain.init();
@@ -29,6 +28,8 @@ void MyRobot::moveTo(unsigned position) {
 void MyRobot::robotStartup() {
 
 }
+
+//50 degrees corresponds to about 90 degrees? 
 /**
    Called by the controller between communication with the wireless controller
    during autonomous mode
@@ -36,8 +37,8 @@ void MyRobot::robotStartup() {
    @param dfw instance of the DFW controller
 */
 void MyRobot::autonomous( long time) {
-  Serial.print("\r\nAuto time remaining: ");
-  Serial.print(time);
+//  Serial.print("\r\nAuto time remaining: ");
+//  Serial.print(time);
   lcd.print("AUTO RUNNING!");
   lcd.setCursor(0, 1);
   lcd.print(time);
@@ -48,6 +49,8 @@ void MyRobot::autonomous( long time) {
 
   lcd.print(drivetrain.getGyroValue());
 
+  drivetrain.stopAtLine();
+
 }
 /**
    Called by the controller between communication with the wireless controller
@@ -56,12 +59,12 @@ void MyRobot::autonomous( long time) {
    @param dfw instance of the DFW controller
 */
 void MyRobot::teleop( long time) {
-  Serial.print("\r\nTeleop time remaining: ");
-  Serial.print(time);
-  Serial.print("\tright joystick: ");
-  Serial.print(dfw->joystickrv());
-  Serial.print("\tleft joystick: ");
-  Serial.print(dfw->joysticklv());
+//  Serial.print("\r\nTeleop time remaining: ");
+//  Serial.print(time);
+//  Serial.print("\tright joystick: ");
+//  Serial.print(dfw->joystickrv());
+//  Serial.print("\tleft joystick: ");
+//  Serial.print(dfw->joysticklv());
   //Run functions in the robot class
   //moveTo(35);
   lcd.print("TELEOP RUNNING!");
@@ -75,7 +78,7 @@ void MyRobot::teleop( long time) {
     drivetrain.driveWithJoystick(dfw->joysticklv(), 180 - dfw->joystickrv());
   }
   if (dfw->one()) {//ACTUALLY UP
-    lift.liftUp();
+    lift.liftUp();  
   } else {
     lift.stopLift();
   }

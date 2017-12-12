@@ -3,15 +3,16 @@
 //TODO- add potentiometer..
 
 void Lift::init(){
-    liftMotor.attach(9, 1000, 2000);
+    liftMotor.attach(11, 1000, 2000);
 }
 
 void Lift::liftUp(){
-  liftMotor.write(90-30);  
+  liftMotor.write(90-40);  
+  Serial.println("Lifting UP");
 }
 
 void Lift::liftDown(){
-  liftMotor.write(90+30);  
+  liftMotor.write(90+40);  
 }
 
 void Lift::stopLift(){

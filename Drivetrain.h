@@ -21,6 +21,6 @@ class Drivetrain {
     float gyroVoltage = 5, gyroSensitivity = .0125, rotationThreshold = 2, currentAngle;
     long gyroZeroVoltage;
 
-    unsigned lineTrackerPin;
+    unsigned leftLineTrackerPin = 8, rightLineTrackerPin = 9;
     Servo leftDriveMotor, rightDriveMotor;
 };

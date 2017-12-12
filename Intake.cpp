@@ -1,7 +1,7 @@
 #include "Intake.h"
 
 void Intake::init() {
-  leftIntakeMotor.attach(8, 1000, 2000);
+  leftIntakeMotor.attach(10, 1000, 2000);
   rightIntakeMotor.attach(7, 1000, 2000);
 
   rightIntakeMotor.write(90);
