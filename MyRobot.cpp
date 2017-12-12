@@ -36,19 +36,18 @@ void MyRobot::robotStartup() {
    @param dfw instance of the DFW controller
 */
 void MyRobot::autonomous( long time) {
-//  Serial.print("\r\nAuto time remaining: ");
-//  Serial.print(time);
+  Serial.print("\r\nAuto time remaining: ");
+  Serial.print(time);
   lcd.print("AUTO RUNNING!");
   lcd.setCursor(0, 1);
-  lcd.print(analogRead(8));
+  lcd.print(time);
   lcd.setCursor(0, 0);
-
-//  lcd.setCursor(0, 1);
-//  lcd.print(time);
-    drivetrain.stopAtLine();
-//  lcd.setCursor(0, 0);
   //note: add javadoc comments
-//  Serial.println(analogRead(8));
+
+  drivetrain.readGyroValues();
+
+  lcd.print(drivetrain.getGyroValue());
+
 }
 /**
    Called by the controller between communication with the wireless controller
@@ -65,23 +64,10 @@ void MyRobot::teleop( long time) {
   Serial.print(dfw->joysticklv());
   //Run functions in the robot class
   //moveTo(35);
-
-
-
   lcd.print("TELEOP RUNNING!");
   lcd.setCursor(0, 1);
-
-  lcd.print(analogRead(8));
+  lcd.print(time);
   lcd.setCursor(0, 0);
-
-
-//potentiometer prints
-//  lcd.print(analogRead(7));
-//  lcd.setCursor(0, 0);
-
-//  lcd.print(time);
-//  lcd.setCursor(0, 0);
-
   //  joystick.checkForInput();
 
   if (dfw->getCompetitionState() != powerup) {

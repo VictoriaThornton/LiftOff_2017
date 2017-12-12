@@ -26,7 +26,7 @@ void setup() {
 void loop() {
   dfw.run();
   //Serial.println(analogRead(7)); //read potentiometer value...
-  Serial.println(analogRead(9),DEC);
+ // Serial.println(analogRead(9),DEC);
   //make gyro 6? 
   //make line trackers 8&9? 
 }

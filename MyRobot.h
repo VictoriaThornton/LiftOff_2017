@@ -3,8 +3,9 @@
 #include "Servo.h"
 #include <DFW.h>
 #include <AbstractDFWRobot.h>
-#include "DFWJoystick.h"
-
+#include "Lift.h"
+#include "Drivetrain.h"
+#include "Intake.h"
 
 class MyRobot :public AbstractDFWRobot{
 public:
@@ -44,7 +45,6 @@ private:
     Drivetrain drivetrain;
     Intake intake;
 
-  DFWJoystick joystick;
   unsigned potPin;
   Servo motor;
 };
