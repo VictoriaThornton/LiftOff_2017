@@ -112,10 +112,10 @@ void MyRobot::teleop( long time) {
   //  Serial.print(time);
 
   //Run functions in the robot class
-  //  lcd.print("TELEOP RUNNING!");
-  //  lcd.setCursor(0, 1);
-  //  lcd.print(time);
-  //  lcd.setCursor(0, 0);
+    lcd.print("TELEOP RUNNING!");
+    lcd.setCursor(0, 1);
+    lcd.print(time);
+    lcd.setCursor(0, 0);
 
   if (dfw->getCompetitionState() != powerup) {
     //DFW.joystick will return 0-180 as an int into rightmotor.write
