@@ -21,17 +21,20 @@ void Lift::stopLift(){
 
 //PRESET POSITIONS: 
 void Lift::topPosition(){
-  error = (int) (desiredAngleUp-inputValue);
+  int inputValue = analogRead(7); 
+  int error = (int) (desiredAngleUp-inputValue);
   armValue = constrain(Kp*error,0,180);
   liftMotor.write(armValue);
 }
 void Lift::middlePosition(){
-  error = (int) (desiredAngleMiddle-inputValue);
+   int inputValue = analogRead(7); 
+  int error = (int) (desiredAngleMiddle-inputValue);
   armValue = constrain(Kp*error,0,180);
   liftMotor.write(armValue);
 }
 void Lift::bottomPosition(){
-  error = (int) (desiredAngleDown-inputValue);
+ int  inputValue = analogRead(7); 
+  int error = (int) (desiredAngleDown-inputValue);
   armValue = constrain(Kp*error,0,180);
   liftMotor.write(armValue);
 }

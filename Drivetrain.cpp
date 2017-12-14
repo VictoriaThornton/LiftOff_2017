@@ -18,8 +18,15 @@ void Drivetrain::driveWithJoystick(int leftMotorSpeed, int rightMotorSpeed) {
 }
 
 void Drivetrain::turn(int turn) {
-  leftDriveMotor.write(90 - turn);
-  rightDriveMotor.write(90 - turn);
+  int Kp = 2;
+  int inputValue = getGyroValue();
+  int error = (int)(turn - inputValue);
+  error = (int) (turn - inputValue);
+  //add 90 to the error?
+  int turnValue = constrain(Kp * error, 0, 180);
+
+  leftDriveMotor.write(turnValue);
+  rightDriveMotor.write(turnValue);
 }
 void Drivetrain::driveStraight(int speed) {
   leftDriveMotor.write(90 + speed);
@@ -39,29 +46,29 @@ void Drivetrain::resetGyro() {
   gyroZeroVoltage /= 500;
 }
 void Drivetrain::readGyroValues() {
-      //This line converts the 0-1023 signal to 0-5V and finds the voltage offset from sitting still
-     float gyroRate = ((analogRead(gyroPin)- gyroZeroVoltage) * gyroVoltage) / 1023;
-  
-      //This line divides the voltage we found by the gyro's sensitivity
-    gyroRate /= gyroSensitivity;
-  
-      //Ignore the gyro if our angular velocity does not meet our threshold
-    if (gyroRate >= rotationThreshold || gyroRate <= -rotationThreshold) {
-      //This line divides the value by 100 since we are running in a 10ms loop (1000ms/10ms)
-      gyroRate /= 100;
-      currentAngle += gyroRate;
-    }
-  
-      //Keep our angle between 0-359 degrees
-    if (currentAngle < 0)
-      currentAngle += 360;
-    else if (currentAngle > 359)
-      currentAngle -= 360;
-  
-    //DEBUG
-    Serial.println(currentAngle);
-  
-    delay(10);
+  //This line converts the 0-1023 signal to 0-5V and finds the voltage offset from sitting still
+  float gyroRate = ((analogRead(gyroPin) - gyroZeroVoltage) * gyroVoltage) / 1023;
+
+  //This line divides the voltage we found by the gyro's sensitivity
+  gyroRate /= gyroSensitivity;
+
+  //Ignore the gyro if our angular velocity does not meet our threshold
+  if (gyroRate >= rotationThreshold || gyroRate <= -rotationThreshold) {
+    //This line divides the value by 100 since we are running in a 10ms loop (1000ms/10ms)
+    gyroRate /= 100;
+    currentAngle += gyroRate;
+  }
+
+  //Keep our angle between 0-359 degrees
+  if (currentAngle < 0)
+    currentAngle += 360;
+  else if (currentAngle > 359)
+    currentAngle -= 360;
+
+  //DEBUG
+  Serial.println(currentAngle);
+
+  delay(10);
 }
 
 //working...
@@ -69,12 +76,14 @@ float Drivetrain::getGyroValue() {
   return currentAngle;
 }
 
-void Drivetrain::stopAtLine(){
-  if(analogRead(leftLineTrackerPin) < 950 || analogRead(rightLineTrackerPin) < 950){
+void Drivetrain::stopAtLine() {
+  int value = analogRead(rightLineTrackerPin);
+  if (value < 850) {
+    value = 200;
     stopDrive();
-    delay(10);
+    delay(100);
   }
-  if (analogRead(leftLineTrackerPin) > 1000 || analogRead(rightLineTrackerPin) > 1000){
-    driveStraight(30);  
-  } 
+  else {
+    driveStraight(30);
+  }
 }

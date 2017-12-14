@@ -6,6 +6,8 @@
 #include "Lift.h"
 #include "Drivetrain.h"
 #include "Intake.h"
+//#include "LiquidCrystal.h"
+
 
 class MyRobot :public AbstractDFWRobot{
 public:
@@ -38,6 +40,10 @@ public:
    int getDebugLEDPin(void){return 13;};
 
   void initialize();
+  void autonomousOneOrbit();
+  void autonomousTwoOrbits();
+  void autonomousScoreHighOrbit(); 
+  
   void moveTo(unsigned position);
   ~MyRobot(){};
 private:

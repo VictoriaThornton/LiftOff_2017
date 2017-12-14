@@ -6,17 +6,17 @@ void Intake::init() {
 
   rightIntakeMotor.write(90);
   leftIntakeMotor.write(90);
-}
+} 
 
 //check directions....
 void Intake::intakeOut() {
-  leftIntakeMotor.write(90 + 20);
-  rightIntakeMotor.write(90 - 20);
+  leftIntakeMotor.write(90 + 40);
+  rightIntakeMotor.write(90 - 40);
 }
 
 void Intake::intakeIn() {
-  leftIntakeMotor.write(90 - 20);
-  rightIntakeMotor.write(90 + 20);
+  leftIntakeMotor.write(90 - 40);
+  rightIntakeMotor.write(90 + 40);
 }
 
 void Intake::stopIntake() {
