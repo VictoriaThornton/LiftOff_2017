@@ -2,24 +2,21 @@
 #include "Arduino.h"
 #include <LiquidCrystal.h>
 
-/**
-   These are the execution runtions
-*/
 LiquidCrystal lcd(40, 41, 42, 43, 44, 45);
 
+/**
+   Initialize the robot
+*/
 void MyRobot::initialize() {
-  //initialize all objects here...
+  //initialize all subsystems
   lift.init();
   intake.init();
   drivetrain.init();
-  intake.stopIntake();
 
+  //setup lcd screen
   lcd.begin(16, 2);
   lcd.clear();
   lcd.setCursor(0, 0);
-}
-
-void MyRobot::moveTo(unsigned position) {
 }
 
 /**
@@ -28,7 +25,6 @@ void MyRobot::moveTo(unsigned position) {
 void MyRobot::robotStartup() {
 
 }
-//50 degrees corresponds to about 90 degrees?
 
 /**
    Called by the controller between communication with the wireless controller
@@ -37,69 +33,26 @@ void MyRobot::robotStartup() {
    @param dfw instance of the DFW controller
 */
 void MyRobot::autonomous( long time) {
-  //    Serial.print("\r\nAuto time remaining: ");
-  //    Serial.print(time);
+  //show the time left in auto on the lcd screen
   lcd.print("AUTO RUNNING!");
   lcd.setCursor(0, 1);
-  lcd.print(time);
-  lcd.setCursor(0, 0);
-  //note: add javadoc comments
 
-  lcd.print(analogRead(9));
+  autonomousScoreHighOrbit();
+}
 
+void MyRobot::autonomousScoreHighOrbit() {
+  //move the lift to the correct height
   lift.topPosition();
+
+  //stop at the white line
   drivetrain.stopAtLine();
 
-  if (analogRead(9) < 850) {
-    Serial.println("Intake out");
+  //if the line sensor sees the white line, run the intake in reverse and stop driving
+  if (analogRead(9) < 800) {
     intake.intakeOut();
     drivetrain.stopDrive();
   }
 }
-
-void MyRobot::autonomousScoreHighOrbit() {
-  lift.topPosition();
-
-  lcd.print(analogRead(8));
-  Serial.println(analogRead(7));
-  if (analogRead(7) > 450) {
-    Serial.println("About 420");
-    drivetrain.stopAtLine();
-  }
-
-  if (analogRead(8) > 830 || analogRead(8) < 850  && analogRead(9) > 830 || analogRead(9) < 850) {
-    //intake.intakeOut();
-  }
-}
-
-//void autonomousOneOrbit() {
-//  drivetrain.stopAtLine();
-//
-//  if (analogRead(8) < 600 || analogRead(9) < 600) {
-//    intake.intakeOut();
-//  }
-//}
-
-//void autonomousTwoOrbits() {
-//  lift.topPosition();
-//
-//  drivetrain.readGyroValues();
-//
-//  lcd.print(drivetrain.getGyroValue());
-//
-//  drivetrain.stopAtLine();
-//
-//  drivetrain.turn(90);
-//  while (millis() < currentTime + millis()) {
-//    drivetrain.driveStraight(60);
-//  }
-//
-//  drivetrain.turn(90);
-//
-//  drivetrain.stopAtLine();
-//
-//  autonomousOneOrbit();
-//}
 
 /**
    Called by the controller between communication with the wireless controller
@@ -108,22 +61,20 @@ void MyRobot::autonomousScoreHighOrbit() {
    @param dfw instance of the DFW controller
 */
 void MyRobot::teleop( long time) {
-  //  Serial.print("\r\nTeleop time remaining: ");
-  //  Serial.print(time);
 
-  //Run functions in the robot class
-    lcd.print("TELEOP RUNNING!");
-    lcd.setCursor(0, 1);
-    lcd.print(time);
-    lcd.setCursor(0, 0);
+  //print the time left in teleop
+  lcd.print("TELEOP RUNNING!");
+  lcd.setCursor(0, 1);
+  lcd.print(time);
+  lcd.setCursor(0, 0);
 
   if (dfw->getCompetitionState() != powerup) {
-    //DFW.joystick will return 0-180 as an int into rightmotor.write
     drivetrain.driveWithJoystick(dfw->joysticklv(), 180 - dfw->joystickrv());
   }
   if (dfw->one()) {
     lift.liftUp();
-  } else {
+  }
+  else {
     lift.stopLift();
   }
   if (dfw->two()) {
@@ -154,7 +105,4 @@ void MyRobot::teleop( long time) {
 */
 void MyRobot::robotShutdown(void) {
   Serial.println("Here is where I shut down my robot code");
-  //  intake.stopIntake();
-  //    lift.stopLift();
-  //lift.bottomPosition();
 }

@@ -13,9 +13,9 @@ class Lift {
     void bottomPosition();
 
   private:
-    unsigned potPin;
+    unsigned potPin = 7;
     Servo liftMotor;
     const double desiredAngleUp = 420, desiredAngleDown = 870, desiredAngleMiddle = 740; //in degrees
     const double Kp = 1, Ki = 0, Kd = 0;
-    double armValue = 0, setpoint, outputValue; //inputValue, outputValue;
+    double armValue = 0, setpoint, outputValue;
 };
